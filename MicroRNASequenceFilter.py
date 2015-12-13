@@ -36,7 +36,7 @@ class SequenceFinder(object):
 
     def __init__(self):
         self.top = Tkinter.Tk()
-        self.top.wm_title("Aplikacja do filtrowania sekwencji")
+        self.top.wm_title("MicroRNASequenceFilter")
         self.intro = "\nAplikacja do filtrowania sekwencji\n"
         self.entry = ["pozycja", "nukleotyd"]
         self.positions = ["brak"] + range(1, 26)

@@ -11,7 +11,7 @@ __author__ = 'Marcin Pieczyński'
 ###########################################
 expected_false_output = """brak sekwencji spełniających zadane warunki"""
 
-expected_output_selekcja_1 = """Dane z pliku plik_testowy_fasta.txt
+expected_output_selekcja_1 = """Dane z pliku test_file.txt
 Work finished -> 8 sequences were found with:
 A in position 1
 
@@ -33,7 +33,7 @@ stu-miR1886i-5p
 AUGAGAUGAAAUUAGCGUUUGGAU
 """
 
-expected_output_selekcja_2 = """Dane z pliku plik_testowy_fasta.txt
+expected_output_selekcja_2 = """Dane z pliku test_file.txt
 Work finished -> 3 sequences were found with:
 A in position 1
 U in position 2
@@ -47,7 +47,7 @@ AUGAGAUGAAAUUAGCGUUUGGAU
 """
 
 
-expected_output_selekcja_3 = """Dane z pliku plik_testowy_fasta.txt
+expected_output_selekcja_3 = """Dane z pliku test_file.txt
 Work finished -> 2 sequences were found with:
 A in position 1
 U in position 2
@@ -67,7 +67,7 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
     def setUp(self):
         """Tworzenie instancji dla klascy SequenceFinder"""
         self.program = SequenceFinder()
-        self.program.input_file_a = "plik_testowy_fasta.txt"
+        self.program.input_file_a = "test_file.txt"
         self.program.open_input_file(self.program.input_file_a)
 
     def test_start_SequenceFinder(self):
@@ -221,8 +221,8 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         # nie powinny dość do etapy wykonywania metody selekcja_sekwencji_1  / _2 / lub _3
 
         self.program.selekcja_sekwencji_1(0, "A")
-        self.assertEqual(self.program.output_seq, expected_output_selekcja_1,
-                         msg="Sprawdź --> test_selekcja_sekwencji_1")
+        self.assertEqual(self.program.output_seq, expected_output_selekcja_1,)
+                         # msg="Sprawdź --> test_selekcja_sekwencji_1")
 
         self.program.open_input_file(self.program.input_file_a)
         self.program.selekcja_sekwencji_2(0, "A", 1, "U")
