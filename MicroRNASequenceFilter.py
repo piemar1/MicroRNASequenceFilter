@@ -144,6 +144,7 @@ class SequenceFinder(object):
 
     @selekcja
     def selekcja_sekwencji_1(self, pozycja1, nukleotyd1):
+        """Funkcja filtrująca sekwencje wedłóg pozycji jednego nukleotydu"""
         for record in SeqIO.parse(self.input_seq, "fasta"):
             if record.seq[pozycja1].upper() == nukleotyd1:
                 self.output_seq += "{}\n{}\n".format(record.id, record.seq)

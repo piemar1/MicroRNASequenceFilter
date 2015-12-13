@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import unittest
+import ttk
+import Tkinter
 from MicroRNASequenceFilter import SequenceFinder
 
 __author__ = 'Marcin Pieczyński'
@@ -233,6 +235,35 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         self.program.selekcja_sekwencji_3(0, "A", 1, "U", 2, "G")
         self.assertEqual(self.program.output_seq, expected_output_selekcja_3,
                          msg="Sprawdź --> test_selekcja_sekwencji_3")
+
+    def test_go(self):
+        """Test wyszukiwania sekwencji w przypadku fałaszywych danych wyszukiwania."""
+
+        self.program.position1 = ttk.Combobox()
+        self.program.position1['values'] = "pozycja"
+
+        self.program.position2 = ttk.Combobox()
+        self.program.position2['values'] = "pozycja"
+
+        self.program.position3 = ttk.Combobox()
+        self.program.position3['values'] = "pozycja"
+
+        self.program.nukleotyd1 = ttk.Combobox()
+        self.program.nukleotyd1['values'] = "nukleotyd"
+
+        self.program.nukleotyd2 = ttk.Combobox()
+        self.program.nukleotyd2['values'] = "nukleotyd"
+
+        self.program.nukleotyd3 = ttk.Combobox()
+        self.program.nukleotyd3['values'] = "nukleotyd"
+
+        self.program.text_field = Tkinter.Text()
+
+        self.program.go()
+        self.assertEqual(self.program.output_seq, "brak sekwencji spełniających zadane warunki")
+
+
+
 
 if __name__ == '__main__':
     unittest.main()
