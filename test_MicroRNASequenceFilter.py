@@ -223,8 +223,8 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         # nie powinny dość do etapy wykonywania metody selekcja_sekwencji_1  / _2 / lub _3
 
         self.program.selekcja_sekwencji_1(0, "A")
-        self.assertEqual(self.program.output_seq, expected_output_selekcja_1,)
-                         # msg="Sprawdź --> test_selekcja_sekwencji_1")
+        self.assertEqual(self.program.output_seq, expected_output_selekcja_1,
+                         msg="Sprawdź --> test_selekcja_sekwencji_1")
 
         self.program.open_input_file(self.program.input_file_a)
         self.program.selekcja_sekwencji_2(0, "A", 1, "U")
@@ -261,9 +261,6 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
 
         self.program.go()
         self.assertEqual(self.program.output_seq, "brak sekwencji spełniających zadane warunki")
-
-
-
 
 if __name__ == '__main__':
     unittest.main()
