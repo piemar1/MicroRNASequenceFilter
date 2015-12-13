@@ -1,4 +1,16 @@
-# MicroRNASequenceFilter
+MicroRNASequenceFilter
+======================
+
+
+Requirements
+------------
+Python 2.7
+Biopython (http://biopython.org)
+
+
+Description
+-----------
+
 Aplication for microRNA sequences filtering according to interested nucleotides in a given positions.
 
 Aplication enable to filter DNA or RNA sequences.
