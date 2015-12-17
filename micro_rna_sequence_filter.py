@@ -12,7 +12,7 @@ __author__ = 'Marcin Pieczyński'
 
 """
 Program do przeszukiwania sekwencji fasta wedłóg zadanych parametrów.
-Umożliwia selekcje na podstawie sekwencji pierwszych 3 nukleotdów.
+Umożliwia selekcje sekwencji na podstawie wybranych nukleotydów w wybranych pozycjach.
 """
 
 text_output1 = """Dane z pliku {}
@@ -58,7 +58,7 @@ class SequenceFinder(object):
         self.output_file = None
 
     def open_input_file(self, in_file):
-        """Funkcja otwierająca zadany plik - in_file"""
+        """Funkcja otwierająca zadany plik z danymi wejściowymi- in_file"""
         try:
             self.input_seq = open(in_file, "rU")
         except IOError:
@@ -66,7 +66,7 @@ class SequenceFinder(object):
                                    " Hej, jest problem z otwarciem pliku co go to chcesz załadować. Zrób z tym coś.")
 
     def input_file(self):
-        """ okno wprowadzające plik z danych wejściowymi"""
+        """ Okno wprowadzające plik z danymi wejściowymi"""
         try:
             f = tkFileDialog.askopenfilename(parent=self.top, initialdir="/home/",
                                              title="Wybór pliku fasta",
@@ -78,19 +78,18 @@ class SequenceFinder(object):
                                    " Hej, jest problem z ścieżką do pliku co go to chcesz załadować. Zrób z tym coś.")
 
     def save(self):
-        """ okno wprowadzające plik z danych wejściowymi"""
+        """ Okno służące do zapisywania danych wyjściowych do pliku"""
         try:
             f = tkFileDialog.asksaveasfilename(parent=self.top, initialdir="/home/marcin/pulpit/Py/",
                                                title="Wybór pliku fasta", filetypes=[("Text file", ".txt")])
             self.output_file_a = os.path.realpath(f) + ".txt"
+            self.output_file = open(self.output_file_a, "w")
+            self.output_file.write(str(self.output_seq))
+            self.output_file.close()
+            tkMessageBox.showinfo("Wszystko OK", "Hej, wszystko OK, plik został zapisany we wskazanym miejscu :-)")
         except ValueError:
             tkMessageBox.showerror("Error",
                                    " Hej, jest problem z tym plikiem co go to chcesz zapisać. Zrób z tym coś.")
-
-        self.output_file = open(self.output_file_a, "w")
-        self.output_file.write(str(self.output_seq))
-        self.output_file.close()
-        tkMessageBox.showinfo("Wszystko OK", "Hej, wszystko OK, plik został zapisany we wskazanym miejscu :-)")
 
     def input_control1(self, input_pos, input_nuc):
         """Metoda sprawdzająca dane input dla pierwszego nukleotydu"""
@@ -135,6 +134,7 @@ class SequenceFinder(object):
         self.output_seq, self.prefix, self.n = "", "", 0
 
     def selekcja(foo):
+        """Metoda dokonująca właściwego filtrowania danych"""
         def wraper(self, *args):
             self.start_output()
             foo(self, *args)
@@ -157,10 +157,10 @@ class SequenceFinder(object):
         """Funkcja filtrująca sekwencje po dwóch pozycjach nukleotydów"""
 
         for record in SeqIO.parse(self.input_seq, "fasta"):
-            if record.seq[pozycja1].upper() == nukleotyd1:                        # spróbowac to poprawić !!!!!
-                if record.seq[pozycja2].upper() == nukleotyd2:
-                    self.output_seq += "{}\n{}\n".format(record.id, record.seq)
-                    self.n += 1
+            if record.seq[pozycja1].upper() == nukleotyd1 and\
+               record.seq[pozycja2].upper() == nukleotyd2:
+                self.output_seq += "{}\n{}\n".format(record.id, record.seq)
+                self.n += 1
 
         self.prefix = text_output2.format(str(self.input_file_a), str(self.n),
                                                 str(nukleotyd1), str(pozycja1+1),
@@ -171,11 +171,11 @@ class SequenceFinder(object):
         """Funkcja filtrująca sekwencje po trzech pozycjach nukleotydów"""
 
         for record in SeqIO.parse(self.input_seq, "fasta"):
-            if record.seq[pozycja1].upper() == nukleotyd1:                      # spróbowac to poprawić !!!!!
-                if record.seq[pozycja2].upper() == nukleotyd2:
-                    if record.seq[pozycja3].upper() == nukleotyd3:
-                        self.output_seq += "{}\n{}\n".format(record.id, record.seq)         # spróbowac to poprawić !!!!!
-                        self.n += 1
+            if record.seq[pozycja1].upper() == nukleotyd1 and\
+               record.seq[pozycja2].upper() == nukleotyd2 and\
+               record.seq[pozycja3].upper() == nukleotyd3:
+                self.output_seq += "{}\n{}\n".format(record.id, record.seq)
+                self.n += 1
 
         self.prefix = text_output3 .format(str(self.input_file_a), str(self.n),
                                                 str(nukleotyd1), str(pozycja1+1),
@@ -183,7 +183,9 @@ class SequenceFinder(object):
                                                 str(nukleotyd3), str(pozycja3+1))
 
     def go(self):
-        """ Metoda wywołująca otwarcie pliku oraz filtrowanie sekencji. """
+        """ Metoda wywołująca otwarcie pliku oraz filtrowanie sekencji.
+        Metoda wywołuje również wiele innych metod. """
+
         self.open_input_file(self.input_file_a)
 
         self.input_control1(self.position1.get(), self.nukleotyd1.get())
@@ -303,8 +305,7 @@ class SequenceFinder(object):
         # pole tekstowe
         scrol = Tkinter.Scrollbar(self.top)
         scrol.grid(row=9, column=7, rowspan=3, sticky="ns")
-
-        self.text_field = Tkinter.Text(self.top, width=87, yscrollcommand=scrol.set)
+        self.text_field = Tkinter.Text(self.top, width=123, yscrollcommand=scrol.set)
         self.text_field.grid(column=0, columnspan=8, row=9, rowspan=3)
         self.text_field.insert('1.0', "Tutaj będą wyświetlone wyniki przeszukiwania sekwencji")
 
@@ -313,6 +314,7 @@ class SequenceFinder(object):
         # pusta linia
         Tkinter.Label(self.top).grid(row=10, column=0, columnspan=szerokosc)
 
+        # Przycisk do zapisu danych
         button = Tkinter.Button(self.top, text="Save", borderwidth=2,
                                 command=self.save)
         button.grid(row=14, column=3, columnspan=2, sticky="nswe")

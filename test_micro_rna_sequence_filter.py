@@ -189,8 +189,7 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
 
         # Testowanie tylko prawidłowych danych dla self.program.pos i self.program.nuc
         # Przypadki z danymi nieprawidłowymi ("pozycja", "nukleotyd", "brak")
-        # sprawdzane są pośrednio w poprzednich testach i
-        # nie powinny dość do etapy wykonywania metody selekcja_sekwencji_1  / _2 / lub _3
+        # sprawdzane są w poprzednich testach
 
         self.program.selekcja_sekwencji_1(0, "A")
         self.assertEqual(self.program.output_seq, expected_output_selekcja_1,
