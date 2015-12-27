@@ -91,29 +91,29 @@ class SequenceFinder(object):
             tkMessageBox.showerror("Error",
                                    " Hej, jest problem z tym plikiem co go to chcesz zapisać. Zrób z tym coś.")
 
-    def input_control1(self, input_pos, input_nuc):
+
+        # self.input_control1(self.position1.get(), self.nukleotyd1.get())
+        # self.input_control2(self.position2.get(), self.nukleotyd2.get())
+        # self.input_control3(self.position3.get(), self.nukleotyd3.get())
+
+    def input_control(self):
         """Metoda sprawdzająca dane input dla pierwszego nukleotydu"""
-        if input_pos == self.entry[0] or input_pos == self.positions[0] or \
-           input_nuc == self.entry[1] or input_nuc == self.nukleotydy[0]:
+
+        self.pos1, self.nuc1 = self.position1.get(), self.nukleotyd1.get()
+        self.pos2, self.nuc2 = self.position2.get(), self.nukleotyd2.get()
+        self.pos3, self.nuc3 = self.position3.get(), self.nukleotyd3.get()
+
+        if self.pos1 == self.entry[0] or self.pos1 == self.positions[0] or \
+           self.nuc1 == self.entry[1] or self.nuc1 == self.nukleotydy[0]:
             self.pos1, self.nuc1 = False, False
-        else:
-            self.pos1, self.nuc1 = input_pos, input_nuc
 
-    def input_control2(self, input_pos, input_nuc):
-        """Metoda sprawdzająca dane input dla drugiego nukleotydu"""
-        if input_pos == self.entry[0] or input_pos == self.positions[0] or \
-           input_nuc == self.entry[1] or input_nuc == self.nukleotydy[0]:
+        if self.pos2 == self.entry[0] or self.pos2 == self.positions[0] or \
+           self.nuc2 == self.entry[1] or self.nuc2 == self.nukleotydy[0]:
             self.pos2, self.nuc2 = False, False
-        else:
-            self.pos2, self.nuc2 = input_pos, input_nuc
 
-    def input_control3(self, input_pos, input_nuc):
-        """Metoda sprawdzająca dane input dla trzeciego nukleotydu"""
-        if input_pos == self.entry[0] or input_pos == self.positions[0] or \
-           input_nuc == self.entry[1] or input_nuc == self.nukleotydy[0]:
+        if self.pos3 == self.entry[0] or self.pos3 == self.positions[0] or \
+           self.nuc3 == self.entry[1] or self.nuc3 == self.nukleotydy[0]:
             self.pos3, self.nuc3 = False, False
-        else:
-            self.pos3, self.nuc3 = input_pos, input_nuc
 
     def get_pos_from_str(self):
         """ Metoda zamieniająca pozycje nukleotydów string --> int """
@@ -163,8 +163,8 @@ class SequenceFinder(object):
                 self.n += 1
 
         self.prefix = text_output2.format(str(self.input_file_a), str(self.n),
-                                                str(nukleotyd1), str(pozycja1+1),
-                                                str(nukleotyd2), str(pozycja2+1))
+                                          str(nukleotyd1), str(pozycja1+1),
+                                          str(nukleotyd2), str(pozycja2+1))
 
     @selekcja
     def selekcja_sekwencji_3(self, pozycja1, nukleotyd1, pozycja2, nukleotyd2, pozycja3, nukleotyd3):
@@ -178,9 +178,9 @@ class SequenceFinder(object):
                 self.n += 1
 
         self.prefix = text_output3 .format(str(self.input_file_a), str(self.n),
-                                                str(nukleotyd1), str(pozycja1+1),
-                                                str(nukleotyd2), str(pozycja2+1),
-                                                str(nukleotyd3), str(pozycja3+1))
+                                           str(nukleotyd1), str(pozycja1+1),
+                                           str(nukleotyd2), str(pozycja2+1),
+                                           str(nukleotyd3), str(pozycja3+1))
 
     def go(self):
         """ Metoda wywołująca otwarcie pliku oraz filtrowanie sekencji.
@@ -188,9 +188,7 @@ class SequenceFinder(object):
 
         self.open_input_file(self.input_file_a)
 
-        self.input_control1(self.position1.get(), self.nukleotyd1.get())
-        self.input_control2(self.position2.get(), self.nukleotyd2.get())
-        self.input_control3(self.position3.get(), self.nukleotyd3.get())
+        self.input_control()
 
         self.get_pos_from_str()
 

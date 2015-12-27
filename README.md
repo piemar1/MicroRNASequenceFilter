@@ -5,7 +5,7 @@ MicroRNASequenceFilter
 Requirements
 ------------
 Python 2.7
-Biopython (http://biopython.org)
+Biopython 1.66 (http://biopython.org)
 
 
 Description

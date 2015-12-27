@@ -85,83 +85,31 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         self.assertEqual(self.program.positions, ["brak"] + range(1, 26))
         self.assertEqual(self.program.nukleotydy, ["brak", "A", "G", "C", "T", "U"])
 
-    def test_input_control_1a(self):
-        """Test 1a - testowanie parametrów przeszukiwania sekwencji - pierwszy nukleotyd"""
+    def test_input_control(self):
 
-        self.program.input_control1("pozycja", "nukleotyd")
+        """ Testowanie danych input, parametrów przeszukiwania sekwencji."""
+        self.program.position1['values'] = self.program.entry[0]
+        self.program.position2['values'] = self.program.positions[0]
+        self.program.position3['values'] = 3
+        self.program.nukleotyd1['values'] = self.program.entry[1]
+        self.program.nukleotyd2['values'] = self.program.nukleotydy[0]
+        self.program.nukleotyd3['values'] = "U"
+
         self.assertEquals(self.program.pos1, False,
-                          msg="test_input_control-1a - {}".format(self.program.pos1))
+                          msg="test_input_control - {}".format(self.program.pos1))
         self.assertEquals(self.program.nuc1, False,
-                          msg="test_input_control-1a - {}".format(self.program.nuc1))
+                          msg="test_input_control - {}".format(self.program.nuc1))
 
-        self.program.input_control1("brak", "brak")
-        self.assertEquals(self.program.pos1, False,
-                          msg="test_input_control-1d - {}".format(self.program.pos1))
-        self.assertEquals(self.program.nuc1, False,
-                          msg="test_input_control-1d - {}".format(self.program.nuc1))
-
-    def test_input_control_1b(self):
-        """Test 1b - testowanie parametrów przeszukiwania sekwencji - pierwszy nukleotyd"""
-
-        for x in self.program.positions[1:]:
-            for y in self.program.nukleotydy[1:]:
-                self.program.input_control1(x, y)
-                self.assertEquals(self.program.pos1, x,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.pos1, x))
-                self.assertEquals(self.program.nuc1, y,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.nuc1, y))
-
-    def test_input_control_2a(self):
-        """Test 2a - testowanie parametrów przeszukiwania sekwencji - drugi nukleotyd"""
-
-        self.program.input_control2("pozycja", "nukleotyd")
         self.assertEquals(self.program.pos2, False,
-                          msg="test_input_control-1a - {}".format(self.program.pos2))
+                          msg="test_input_control - {}".format(self.program.pos2))
         self.assertEquals(self.program.nuc2, False,
-                          msg="test_input_control-1a - {}".format(self.program.nuc2))
+                          msg="test_input_control - {}".format(self.program.nuc2))
 
-        self.program.input_control1("brak", "brak")
-        self.assertEquals(self.program.pos2, False,
-                          msg="test_input_control-1d - {}".format(self.program.pos2))
-        self.assertEquals(self.program.nuc2, False,
-                          msg="test_input_control-1d - {}".format(self.program.nuc2))
+        self.assertEquals(self.program.pos3, "U",
+                          msg="test_input_control - {}".format(self.program.pos3))
+        self.assertEquals(self.program.nuc3, 3,
+                          msg="test_input_control - {}".format(self.program.nuc3))
 
-    def test_input_control_2b(self):
-        """Test 2b - testowanie parametrów przeszukiwania sekwencji - drugi nukleotyd"""
-
-        for x in self.program.positions[1:]:
-            for y in self.program.nukleotydy[1:]:
-                self.program.input_control2(x, y)
-                self.assertEquals(self.program.pos2, x,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.pos2, x))
-                self.assertEquals(self.program.nuc2, y,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.nuc2, y))
-
-    def test_input_control_3a(self):
-        """Test 3a - testowanie parametrów przeszukiwania sekwencji - trzeci nukleotyd"""
-
-        self.program.input_control3("pozycja", "nukleotyd")
-        self.assertEquals(self.program.pos3, False,
-                          msg="test_input_control-1a - {}".format(self.program.pos3))
-        self.assertEquals(self.program.nuc3, False,
-                          msg="test_input_control-1a - {}".format(self.program.nuc3))
-
-        self.program.input_control1("brak", "brak")
-        self.assertEquals(self.program.pos3, False,
-                          msg="test_input_control-1d - {}".format(self.program.pos3))
-        self.assertEquals(self.program.nuc3, False,
-                          msg="test_input_control-1d - {}".format(self.program.nuc3))
-
-    def test_input_control_3b(self):
-        """Test 3b - testowanie parametrów przeszukiwania sekwencji - trzeci nukleotyd"""
-
-        for x in self.program.positions[1:]:
-            for y in self.program.nukleotydy[1:]:
-                self.program.input_control3(x, y)
-                self.assertEquals(self.program.pos3, x,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.pos3, x))
-                self.assertEquals(self.program.nuc3, y,
-                                  msg="test_input_contro2 - {}-->{}".format(self.program.nuc3, y))
 
     def test_get_pos_from_str(self):
         """Test get_pos_from_str - testuje czy pozycja nukleotydu jest int i ma włąściwą wartość"""
