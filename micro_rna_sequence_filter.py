@@ -91,11 +91,6 @@ class SequenceFinder(object):
             tkMessageBox.showerror("Error",
                                    " Hej, jest problem z tym plikiem co go to chcesz zapisać. Zrób z tym coś.")
 
-
-        # self.input_control1(self.position1.get(), self.nukleotyd1.get())
-        # self.input_control2(self.position2.get(), self.nukleotyd2.get())
-        # self.input_control3(self.position3.get(), self.nukleotyd3.get())
-
     def input_control(self):
         """Metoda sprawdzająca dane input dla pierwszego nukleotydu"""
 
