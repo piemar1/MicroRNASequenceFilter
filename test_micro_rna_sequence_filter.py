@@ -70,7 +70,13 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         """Tworzenie instancji dla klascy SequenceFinder"""
         self.program = SequenceFinder()
         self.program.input_file_a = "test_file.txt"
+
+        # self.program.entry = ["pozycja", "nukleotyd"]
+        # self.program.positions = ["brak"] + range(1, 26)
+        # self.program.nukleotydy = ["brak", "A", "G", "C", "T", "U"]
+
         self.program.open_input_file(self.program.input_file_a)
+
         self.program.position1 = ttk.Combobox()
         self.program.position2 = ttk.Combobox()
         self.program.position3 = ttk.Combobox()
@@ -88,12 +94,14 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
     def test_input_control(self):
 
         """ Testowanie danych input, parametrów przeszukiwania sekwencji."""
-        self.program.position1['values'] = self.program.entry[0]
-        self.program.position2['values'] = self.program.positions[0]
-        self.program.position3['values'] = 3
-        self.program.nukleotyd1['values'] = self.program.entry[1]
-        self.program.nukleotyd2['values'] = self.program.nukleotydy[0]
-        self.program.nukleotyd3['values'] = "U"
+        self.program.position1.insert(0, self.program.entry[0])
+        self.program.position2.insert(0, self.program.positions[0])
+        self.program.position3.insert(0, 3)
+        self.program.nukleotyd1.insert(0, self.program.entry[1])
+        self.program.nukleotyd2.insert(0, self.program.nukleotydy[0])
+        self.program.nukleotyd3.insert(0, "U")
+
+        self.program.input_control()
 
         self.assertEquals(self.program.pos1, False,
                           msg="test_input_control - {}".format(self.program.pos1))
@@ -105,9 +113,9 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         self.assertEquals(self.program.nuc2, False,
                           msg="test_input_control - {}".format(self.program.nuc2))
 
-        self.assertEquals(self.program.pos3, "U",
+        self.assertEquals(self.program.pos3, "3",
                           msg="test_input_control - {}".format(self.program.pos3))
-        self.assertEquals(self.program.nuc3, 3,
+        self.assertEquals(self.program.nuc3, "U",
                           msg="test_input_control - {}".format(self.program.nuc3))
 
 
