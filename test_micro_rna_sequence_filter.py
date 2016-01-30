@@ -7,6 +7,7 @@ from micro_rna_sequence_filter import SequenceFinder
 
 __author__ = 'Marcin Pieczyński'
 
+""" Branch for review. """
 
 ###########################################
 # Do not change text below. These strings were prepared only for testing !!!
@@ -48,7 +49,6 @@ stu-miR1886i-5p
 AUGAGAUGAAAUUAGCGUUUGGAU
 """
 
-
 expected_output_selekcja_3 = """Dane z pliku test_file.txt
 Work finished -> 2 sequences were found with:
 A in position 1
@@ -70,11 +70,6 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
         """Tworzenie instancji dla klascy SequenceFinder"""
         self.program = SequenceFinder()
         self.program.input_file_a = "test_file.txt"
-
-        # self.program.entry = ["pozycja", "nukleotyd"]
-        # self.program.positions = ["brak"] + range(1, 26)
-        # self.program.nukleotydy = ["brak", "A", "G", "C", "T", "U"]
-
         self.program.open_input_file(self.program.input_file_a)
 
         self.program.position1 = ttk.Combobox()
@@ -117,7 +112,6 @@ class MicroRNA_Sequence_Filter_Test(unittest.TestCase):
                           msg="test_input_control - {}".format(self.program.pos3))
         self.assertEquals(self.program.nuc3, "U",
                           msg="test_input_control - {}".format(self.program.nuc3))
-
 
     def test_get_pos_from_str(self):
         """Test get_pos_from_str - testuje czy pozycja nukleotydu jest int i ma włąściwą wartość"""
