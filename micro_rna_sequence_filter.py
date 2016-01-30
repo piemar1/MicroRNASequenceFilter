@@ -13,6 +13,7 @@ __author__ = 'Marcin Pieczyński'
 """
 Program do przeszukiwania sekwencji fasta wedłóg zadanych parametrów.
 Umożliwia selekcje sekwencji na podstawie wybranych nukleotydów w wybranych pozycjach.
+Branch for rewiev.
 """
 
 text_output1 = """Dane z pliku {}
