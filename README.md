@@ -1,7 +1,7 @@
 MicroRNASequenceFilter
 ======================
 
-Branch for review
+Branch for review.
 
 Requirements
 ------------
