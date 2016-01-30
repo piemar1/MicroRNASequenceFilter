@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# Branch for review.
+
 
 import unittest
 import ttk
